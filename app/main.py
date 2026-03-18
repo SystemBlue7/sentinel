@@ -1,22 +1,26 @@
-from config.settings import ENV, APP_NAME
-from app.modules.temperature.monitor import run as run_temperature
+import sys
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+LIBS_DIR = os.path.abspath(os.path.join(BASE_DIR, "..", "libs"))
+
+if LIBS_DIR not in sys.path:
+    sys.path.insert(0, LIBS_DIR)
+
 from app.services.logger import log
-from app.utils.helpers import separator
-from app.services.database import db
+from app.services.voice import hablar
+from app.modules.voice.listener import escuchar_palabra_clave
 
 
 def main():
-    print(separator("SENTINEL"))
-    log(f"{APP_NAME} INICIANDO...")
-    log(f"ENTORNO: {ENV}")
+    log("Sentinel en modo pasivo...")
 
-    with db.connect() as conn:
-        cursor = conn.cursor()
-        cursor.execute("SELECT 1")
-        log(f"DB OK: {cursor.fetchone()[0]}")
+    while True:
+        activado = escuchar_palabra_clave("sentinel")
 
-    print(separator("MODULOS"))
-    run_temperature()
+        if activado:
+            log("Activación detectada.")
+            hablar("Sentinel en línea")
 
 
 if __name__ == "__main__":

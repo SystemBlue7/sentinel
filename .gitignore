@@ -4,12 +4,16 @@
 # Python
 __pycache__/
 *.pyc
+*.pyo
 
 # Logs
 logs/
 
 # Datos temporales
 data/
+
+# Librerías locales (NO subir)
+libs/
 
 # VS Code
 .vscode/
