@@ -1,0 +1,19 @@
+# Entorno
+.env
+
+# Python
+__pycache__/
+*.pyc
+
+# Logs
+logs/
+
+# Datos temporales
+data/
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
